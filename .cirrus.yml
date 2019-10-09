@@ -3,6 +3,7 @@ task:
   container:
     image: cirrusci/android-sdk:29
     kvm: true
+  install_script: sudo apt-get install -y libnss3-dev
   accel_check_script:
     - sudo chown cirrus:cirrus /dev/kvm
     - emulator -accel-check
