@@ -16,6 +16,6 @@ task:
         -no-audio
         -no-window
   tests_script: ./gradlew test jacocoTestReport
-  wait_emulator_script: ./android-wait-for-emulator
+  wait_emulator_script: android-wait-for-emulator
   integration_tests_script: ./gradlew integrationTest
   
