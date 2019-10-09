@@ -5,7 +5,7 @@ task:
     kvm: true
   install_script: 
     - sudo apt-get update
-    - sudo apt-get install -y libnss3-dev libxcomposite-dev
+    - sudo apt-get install -y libnss3-dev libxss1
   accel_check_script:
     - sudo chown cirrus:cirrus /dev/kvm
     - emulator -accel-check
