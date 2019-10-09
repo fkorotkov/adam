@@ -6,9 +6,15 @@ task:
   accel_check_script:
     - sudo chown cirrus:cirrus /dev/kvm
     - emulator -accel-check
-  create_emulator_script: 
-    - avdmanager create avd -n emulator --package "system-images;android-25;default;x86" --tag default
-  start_emulator_background_script: emulator @emulator -no-snapshot-save
+  create_device_script:
+    echo no | avdmanager create avd --force
+        -n test
+        -k "system-images;android-25;default;x86"
+  start_emulator_background_script:
+    $ANDROID_HOME/emulator/emulator
+        -avd test
+        -no-audio
+        -no-window
   tests_script: ./gradlew test jacocoTestReport
   wait_emulator_script: ./android-wait-for-emulator
   integration_tests_script: ./gradlew integrationTest
