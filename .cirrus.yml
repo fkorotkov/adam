@@ -1,15 +1,23 @@
 task:
-  name: Integration Tests
-  container:
-    image: fkorotkov/android-sdk:29
-    kvm: true
-  accel_check_script:
-    - sudo chown cirrus:cirrus /dev/kvm
-    - emulator -accel-check
+  matrix:
+    - name: Integration Tests (x86)
+      container:
+        image: cirrusci/android-sdk:29
+        kvm: true
+      env:
+        ARCH: x86
+      accel_check_script:
+        - sudo chown cirrus:cirrus /dev/kvm
+        - emulator -accel-check
+    - name: Integration Tests (arm)
+      container:
+        image: cirrusci/android-sdk:29
+      env:
+        ARCH: armeabi-v7a
   create_device_script:
-    - sdkmanager "system-images;android-25;default;x86"
+    - sdkmanager "system-images;android-25;default;$ARCH"
     - sdkmanager --licenses
-    - echo no | avdmanager create avd --force -n test -k "system-images;android-25;default;x86"
+    - echo no | avdmanager create avd --force -n test -k "system-images;android-25;default;$ARCH"
   start_emulator_background_script:
     $ANDROID_HOME/emulator/emulator
         -avd test
