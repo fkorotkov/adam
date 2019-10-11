@@ -15,9 +15,9 @@ task:
       env:
         ARCH: armeabi-v7a
   create_device_script:
-    - sdkmanager "system-images;android-25;default;$ARCH"
+    - sdkmanager "system-images;android-25;google_apis;$ARCH"
     - sdkmanager --licenses
-    - echo no | avdmanager create avd --force -n test -k "system-images;android-25;default;$ARCH"
+    - echo no | avdmanager create avd --force -n test -k "system-images;android-25;google_apis;$ARCH"
   start_emulator_background_script:
     $ANDROID_HOME/emulator/emulator
         -avd test
